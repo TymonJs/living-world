@@ -3,10 +3,10 @@
 #include <algorithm>
 
 string World::getOrganismFromPosition(int x, int y)
-{	
-	for (Organism org : organisms)
-		if (org.getPosition().getX() == x && org.getPosition().getY() == y)
-			return org.getSpecies();
+{
+	for (Organism* org : organisms)
+		if (org->getPosition().getX() == x && org->getPosition().getY() == y)
+			return org->getSpecies();
 	return "";
 }
 
@@ -69,22 +69,45 @@ int World::getTurn()
 
 void World::addOrganism(Organism* organism)
 {
-	this->organisms.push_back(*organism);
+	Position pos = organism->getPosition();
+	if (isPositionOnWorld(pos.getX(), pos.getY())) {
+		this->organisms.push_back(organism);
+
+		std::sort(organisms.begin(), organisms.end(),
+			[](Organism* a, Organism* b) {
+				return a->getInitiative() > b->getInitiative();
+			});
+	}
+}
+
+void World::removeOrganism(Organism* organism)
+{
+    auto it = std::find(organisms.begin(), organisms.end(), organism);
+
+    if (it != organisms.end()) {
+        organisms.erase(it);
+    }
 }
 
 void World::makeTurn()
 {
+	// srand(time(0));
+	// for (Organism* org: organism){
+	// 	newPositions = getVectorOfFreePositionsAround(org.getPosition());
+	// 	numberOfNewPositions = newPositions.size();
+	// }
 	vector<Position> newPositions;
 	int numberOfNewPositions;
 	int randomIndex;
 
 	srand(time(0));
-	for (Organism& org : organisms) {
-		newPositions = getVectorOfFreePositionsAround(org.getPosition());
+	for (Organism* org : organisms) {
+		newPositions = getVectorOfFreePositionsAround(org->getPosition());
 		numberOfNewPositions = newPositions.size();
 		if (numberOfNewPositions > 0) {
 			randomIndex = rand() % numberOfNewPositions;
-			org.setPosition(newPositions[randomIndex]);
+			
+			org-> move(newPositions[randomIndex]);
 		}
 	}
 	turn++;

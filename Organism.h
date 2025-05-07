@@ -50,7 +50,7 @@ public:
 
 	Organism& operator=(const Organism&) = default;
 	Organism& operator=(Organism&&) = default;
-	~Organism() = default;
+	virtual ~Organism();
 
 	int getPower();
 	void setPower(int power);
@@ -58,8 +58,14 @@ public:
 	void setPosition(Position position);
 	string getSpecies();
 	void setSpecies(string spec);
+	int getInitiative();
+	void setLiveLength(int l);
 	vector<Lifespan> getAncestorLifespans();
 
+	void consequences(Organism* other);
+
 	string toString();
+
+	virtual void move(Position position) = 0;
 
 };

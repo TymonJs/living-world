@@ -12,7 +12,7 @@ private:
 	int worldX;
 	int worldY;
 	int turn = 0;
-	vector<Organism> organisms;
+	vector<Organism*> organisms;
 	char separator = '.';
 
 	string getOrganismFromPosition(int x, int y);
@@ -30,7 +30,8 @@ public:
 
 	int getTurn();
 	
-	void addOrganism(Organism *organism);
+	void addOrganism(Organism* organism);
+	void removeOrganism(Organism* organism);
 	vector<Position> getVectorOfFreePositionsAround(Position position);
 	void makeTurn();
 

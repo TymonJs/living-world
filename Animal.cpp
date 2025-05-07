@@ -13,9 +13,9 @@ Animal::Animal() : Organism()
 	lastPosition = position;
 }
 
-void Animal::move(int dx, int dy){
+void Animal::move(Position position){
 	lastPosition = position;
-	position.move(dx,dy);
+	this->position = position;
 	
 }
 

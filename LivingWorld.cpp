@@ -36,22 +36,28 @@ int main()
 	for(auto pos: positions)
 		cout << pos.toString() << endl;
 
-	// Tura 0
 	cout << world.toString() << endl;
+	for(int i = 0; i < 100; i++){
+		world.makeTurn();
+		cout << world.toString() << endl;
+	}
 
-	// Tura 1
-	world.makeTurn();
-	cout << world.toString() << endl;
+	// // Tura 0
+	// cout << world.toString() << endl;
 
-	// Tura 2
-	world.makeTurn();
-	cout << world.toString() << endl;
+	// // Tura 1
+	// world.makeTurn();
+	// cout << world.toString() << endl;
 
-	// world.writeWorld("world.bin");
+	// // Tura 2
+	// world.makeTurn();
+	// cout << world.toString() << endl;
 
-	// Tura 3
-	world.makeTurn();
-	cout << world.toString() << endl;
+	// // world.writeWorld("world.bin");
+
+	// // Tura 3
+	// world.makeTurn();
+	// cout << world.toString() << endl;
 
 	// // powrot do Tury 2
 	// world.readWorld("world.bin");

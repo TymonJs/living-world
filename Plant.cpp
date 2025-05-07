@@ -12,4 +12,8 @@ Plant::Plant(int power, Position position, int birth, int initiative, int powerT
 	setSpecies("P");
 }
 
+void Plant::move(Position){
+	return;
+}
+
 

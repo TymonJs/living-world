@@ -22,6 +22,7 @@ Organism::Organism(int power, Position position, int birth, int initiative, int 
 	powerToReproduce(powerToReproduce),
 	liveLength(liveLength) {}
 
+Organism::~Organism() {}
 
 int Organism::getPower()
 {
@@ -63,4 +64,19 @@ string Organism::getSpecies()
 void Organism::setSpecies(string spec)
 {
 	this->species = spec;
+}
+int Organism::getInitiative()
+{
+	return this->initiative;
+}
+void Organism::setLiveLength(int l){
+	this->liveLength=l;
+}
+void Organism::consequences(Organism* other){
+	if (power > other->getPower()){
+		other->setLiveLength(0);
+	}
+	else{
+		this->setLiveLength(0);
+	}
 }

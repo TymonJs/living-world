@@ -8,7 +8,7 @@ class Animal : public Organism
 	public:
 		Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength);
 		Animal();
-		void move(int dx, int dy);
+		void move(Position position) override;
 	private:
 		Position lastPosition;
 };
