@@ -16,8 +16,10 @@ private:
 	char separator = '.';
 
 	string getOrganismFromPosition(int x, int y);
+	Organism* getOrganismPointerFromPosition(Position p);
 	bool isPositionOnWorld(int x, int y);
 	bool isPositionFree(Position position);
+	bool isPositionFree(int x, int y);
 
 public:
 	World(int worldX, int worldY);
@@ -33,6 +35,7 @@ public:
 	void addOrganism(Organism* organism);
 	void removeOrganism(Organism* organism);
 	vector<Position> getVectorOfFreePositionsAround(Position position);
+	vector<Position> getVectorOfInteractablePositionsAroundOrganism(Organism* org);
 	void makeTurn();
 
 	// void writeWorld(string fileName);

@@ -69,6 +69,10 @@ int Organism::getInitiative()
 {
 	return this->initiative;
 }
+int Organism::getLiveLength()
+{
+	return this->liveLength;
+}
 void Organism::setLiveLength(int l){
 	this->liveLength=l;
 }
@@ -79,4 +83,10 @@ void Organism::consequences(Organism* other){
 	else{
 		this->setLiveLength(0);
 	}
+}
+bool Organism::isDead(){
+	return this->liveLength<=0;
+}
+bool Organism::canReproduce(){
+	return power>=powerToReproduce;
 }

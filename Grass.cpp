@@ -1,5 +1,6 @@
 #include "Grass.h"
 #include "Plant.h"
+#include <set>
 
 Grass::Grass(): Plant()
 {
@@ -9,4 +10,7 @@ Grass::Grass(Position position, int birth)
     : Plant(0,position,birth,0,3,6)
 {
     setSpecies("G");
+}
+Organism* Grass::breed(Position pos, int birth){
+    return new Grass{pos,birth};
 }

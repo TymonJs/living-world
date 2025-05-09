@@ -59,13 +59,19 @@ public:
 	string getSpecies();
 	void setSpecies(string spec);
 	int getInitiative();
+	int getLiveLength();
 	void setLiveLength(int l);
 	vector<Lifespan> getAncestorLifespans();
 
 	void consequences(Organism* other);
+	bool isDead();
 
 	string toString();
 
 	virtual void move(Position position) = 0;
+	virtual bool interactsWith(string species) = 0;
+	virtual Organism* breed(Position pos, int birth) = 0;
+
+	bool canReproduce();
 
 };

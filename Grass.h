@@ -10,5 +10,5 @@ class Grass : public Plant
     public:
         Grass();
         Grass(Position position, int birth);
-
+        Organism* breed(Position pos, int birth) override;
 };

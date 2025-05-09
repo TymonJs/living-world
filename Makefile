@@ -6,7 +6,7 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -O2
 TARGET = LivingWorld
 
 # Source files
-SRCS = LivingWorld.cpp Position.cpp Organism.cpp Plant.cpp Animal.cpp World.cpp Lifespan.cpp Grass.cpp
+SRCS := $(wildcard *.cpp)
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)

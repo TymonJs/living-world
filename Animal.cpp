@@ -1,5 +1,6 @@
 #include "Animal.h"
-
+#include <iostream>
+using namespace std;
 Animal::Animal(int power, Position position, int birth,int initiative, int powerToReproduce, int liveLength)
 	: Organism(power, position,birth, initiative, powerToReproduce, liveLength)
 {
@@ -14,8 +15,9 @@ Animal::Animal() : Organism()
 }
 
 void Animal::move(Position position){
-	lastPosition = position;
+
+	cout << "Sheep moving from (" << this->getPosition().getX()+1<< ", " << this->getPosition().getY() + 1 << ") to (" << position.getX() + 1 << ", " << position.getY() + 1 << ")" << endl;
+	lastPosition = this->position;
 	this->position = position;
-	
 }
 

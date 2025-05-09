@@ -16,4 +16,8 @@ void Plant::move(Position){
 	return;
 }
 
+bool Plant::interactsWith(string){
+	return false;
+}
+
 

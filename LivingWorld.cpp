@@ -5,6 +5,7 @@
 #include "Animal.h"
 #include "World.h"
 #include "Grass.h"
+#include "Sheep.h"
 
 using namespace std;
 
@@ -12,32 +13,31 @@ int main()
 {	
 	// World test
 	World world;
-	Position posP1{ 4, 5 };
-	Plant plantW1{ 3, posP1, 0, 0, 0, 0};
-	Position posP2{ 5, 4 };
-	Plant plantW2{ 3, posP2, 0, 0, 0, 0};
 
 	Position posW2{ 3, 2 };
-	Animal animalW1{ 6, posW2, 0, 0, 0, 0 };
+	Sheep sheep1{posW2,0};
 	Position posW3{ 2, 3 };
-	Animal animalW2{ 6, posW3, 0, 0, 0, 0 };
+	Sheep sheep2{posW3, 0};
 
 	Position postemp{0,0};
 	Grass grass{postemp,0};
 
-	world.addOrganism(&plantW1);
-	world.addOrganism(&plantW2);
-	world.addOrganism(&animalW1);
-	world.addOrganism(&animalW2);
+	world.addOrganism(&sheep1);
+	world.addOrganism(&sheep2);
 	world.addOrganism(&grass);
-	
-	auto positions = world.getVectorOfFreePositionsAround(Position(5, 5));
 
-	for(auto pos: positions)
-		cout << pos.toString() << endl;
+	// Sheep sheep{Position{0,0},0};
+	// Grass grass1{Position{0,1},0};
+	// Grass grass2{Position{1,0},0};
+
+	// world.addOrganism(&sheep);
+	// world.addOrganism(&grass1);
+	// world.addOrganism(&grass2);
 
 	cout << world.toString() << endl;
+	string hold;
 	for(int i = 0; i < 100; i++){
+		cin>> hold;
 		world.makeTurn();
 		cout << world.toString() << endl;
 	}
