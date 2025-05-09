@@ -9,7 +9,7 @@ class Grass : public Plant
 {
     public:
         Grass();
-        Grass(Position position, int birth);
+        Grass(Position position);
         Grass(Position position, int birth, vector<Lifespan> ancestorLifespans);
         Organism* breed(Position pos, int birth, vector<Lifespan> l) override;
 };

@@ -5,8 +5,8 @@ Grass::Grass(): Plant()
 {
     setSpecies("G");
 }
-Grass::Grass(Position position, int birth)
-    : Plant(0,position,birth,0,3,6)
+Grass::Grass(Position position)
+    : Plant(0,position,0,0,3,6)
 {
     setSpecies("G");
 }

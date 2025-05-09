@@ -5,8 +5,8 @@ Wolf::Wolf() : Animal()
 {
     setSpecies("W");
 }
-Wolf::Wolf(Position pos, int birth)
-    : Animal(8,pos,birth,5,16,20)
+Wolf::Wolf(Position pos)
+    : Animal(8,pos,0,5,16,20)
 {
     setSpecies("W");
 }

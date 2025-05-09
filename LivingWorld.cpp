@@ -17,18 +17,18 @@ int main()
 	World world;
 
 	Position posW2{ 3, 3 };
-	Sheep sheep1{posW2,0};
+	Sheep sheep1{posW2};
 	Position posW3{ 2, 3 };
-	Sheep sheep2{posW3, 0};
+	Sheep sheep2{posW3};
 
 	Position postemp{0,0};
-	Grass grass{postemp,0};
+	Grass grass{postemp};
 
 	Position posD{5,5};
-	Dandelion dandelion{posD,0};
+	Dandelion dandelion{posD};
 
 	Position posW{5,0};
-	Wolf wolf{posW,0};
+	Wolf wolf{posW};
 
 	world.addOrganism(&sheep1);
 	// world.addOrganism(&sheep2);

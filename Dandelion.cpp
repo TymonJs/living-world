@@ -4,8 +4,8 @@ Dandelion::Dandelion() : Plant()
 {
     setSpecies("D");
 }
-Dandelion::Dandelion(Position pos, int birth)
-    : Plant(0,pos,birth,0,2,6)
+Dandelion::Dandelion(Position pos)
+    : Plant(0,pos,0,0,2,6)
 {
     setSpecies("D");
 }

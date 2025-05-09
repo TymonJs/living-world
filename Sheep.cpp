@@ -6,8 +6,8 @@ Sheep::Sheep() : Animal()
     species = "S";
 }
 
-Sheep::Sheep(Position pos, int birth)
-    : Animal(3,pos,birth,3,6,10)
+Sheep::Sheep(Position pos)
+    : Animal(3,pos,0,3,6,10)
 {
     species = "S";
 }
