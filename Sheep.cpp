@@ -14,7 +14,7 @@ Sheep::Sheep(Position pos, int birth)
 
 bool Sheep::interactsWith(string species)
 {
-    std::set<std::string> interactables = {"G"};
+    std::set<std::string> interactables = {"G","D"};
     return interactables.count(species) ? true : false;
 }
 

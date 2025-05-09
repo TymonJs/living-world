@@ -1,6 +1,7 @@
 #include "World.h"
 #include <fstream>
 #include <algorithm>
+#include <iostream>
 
 string World::getOrganismFromPosition(int x, int y)
 {
@@ -43,7 +44,7 @@ vector<Position> World::getVectorOfFreePositionsAround(Position position)
 	vector<Position> result;
 	for(int x = -1; x < 2; ++x)
 		for (int y = -1; y < 2; ++y){
-			if (x == 0 || y == 0) continue;
+			if (x == 0 && y == 0) continue;
 			int new_x = pos_x + x, new_y = pos_y + y;
 			if (isPositionOnWorld(new_x, new_y) && isPositionFree(new_x, new_y)){
 				result.push_back(Position(pos_x + x, pos_y + y));
@@ -61,7 +62,7 @@ vector<Position> World::getVectorOfInteractablePositionsAroundOrganism(Organism*
 
 	for(int x = -1; x < 2; ++x)
 		for (int y = -1; y < 2; ++y){
-			if (x == 0 || y == 0) continue;
+			if (x == 0 && y == 0) continue;
 			int new_x = pos_x + x, new_y = pos_y + y;
 			if (!isPositionOnWorld(new_x,new_y)) continue;
 
@@ -116,27 +117,18 @@ void World::addOrganism(Organism* organism)
 			});
 	}
 }
-
-void World::removeOrganism(Organism* organism)
-{
-    auto it = std::find(organisms.begin(), organisms.end(), organism);
-
-    if (it != organisms.end()) {
-        organisms.erase(it);
-    }
-}
-
 void World::makeTurn()
 {
-	// TODO: osobny loop do usuwania organizmów
 	vector<Position> freePositions;
 	vector<Position> interactablePositions;
 	int numberOfFreePositions;
 	int numberOfInteractablePositions;
 	int randomIndex;
 
+	vector<Organism*> curr = organisms;
+
 	srand(time(0));
-	for (Organism* org : organisms) {
+	for (Organism* org : curr) {
 		if (org->isDead()) continue;
 
 		freePositions = getVectorOfFreePositionsAround(org->getPosition());
@@ -144,6 +136,7 @@ void World::makeTurn()
 		numberOfFreePositions = freePositions.size();
 		numberOfInteractablePositions = interactablePositions.size();
 		
+		std::cout << org->getSpecies() <<" interactable positions: " << numberOfInteractablePositions << std::endl;
 		
 		if (numberOfFreePositions > 0 && org->canReproduce()){
 			randomIndex = rand() % numberOfFreePositions;
@@ -159,16 +152,24 @@ void World::makeTurn()
 			Organism* other = getOrganismPointerFromPosition(newPosition);
 			if (other){
 				org->consequences(other);
-				if (other->isDead()) removeOrganism(other);
+				if (other->isDead()) org -> move(newPosition);
 			}
 			else org-> move(newPosition);
 
-			org->setPower(org->getPower()+1);
-			org->setLiveLength(org->getLiveLength()-1);
-			
-			if (org->isDead()) removeOrganism(org);
 			}
+
+		org->setPower(org->getPower()+1);
+		org->setLiveLength(org->getLiveLength()-1);
 	}
+
+	organisms.erase(
+		remove_if(organisms.begin(), organisms.end(),
+			[](Organism* org) {
+				return org->isDead();
+			}),
+		organisms.end()
+	);
+	
 	turn++;
 }
 

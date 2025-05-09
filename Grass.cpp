@@ -1,6 +1,5 @@
 #include "Grass.h"
 #include "Plant.h"
-#include <set>
 
 Grass::Grass(): Plant()
 {
