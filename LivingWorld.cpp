@@ -7,6 +7,7 @@
 #include "Grass.h"
 #include "Sheep.h"
 #include "Dandelion.h"
+#include "Wolf.h"
 
 using namespace std;
 
@@ -20,16 +21,20 @@ int main()
 	Position posW3{ 2, 3 };
 	Sheep sheep2{posW3, 0};
 
-	Position postemp{2,2};
+	Position postemp{0,0};
 	Grass grass{postemp,0};
 
-	Position posD{3,2};
+	Position posD{5,5};
 	Dandelion dandelion{posD,0};
+
+	Position posW{5,0};
+	Wolf wolf{posW,0};
 
 	world.addOrganism(&sheep1);
 	// world.addOrganism(&sheep2);
-	// world.addOrganism(&grass);
+	world.addOrganism(&grass);
 	world.addOrganism(&dandelion);
+	world.addOrganism(&wolf);
 
 	// Sheep sheep{Position{0,0},0};
 	// Grass grass1{Position{0,1},0};

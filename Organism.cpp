@@ -76,6 +76,12 @@ int Organism::getLiveLength()
 void Organism::setLiveLength(int l){
 	this->liveLength=l;
 }
+Lifespan Organism::getLifespan(){
+	return this->lifespan;
+}
+void Organism::addAncestorLifespan(Lifespan l){
+	this->ancestorLifespans.push_back(l);
+}
 void Organism::consequences(Organism* other){
 	if (power > other->getPower()){
 		other->setLiveLength(0);
@@ -89,4 +95,7 @@ bool Organism::isDead(){
 }
 bool Organism::canReproduce(){
 	return power>=powerToReproduce;
+}
+void Organism::die(int turn){
+	this->lifespan.setDeath(turn);
 }

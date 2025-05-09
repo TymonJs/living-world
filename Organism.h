@@ -62,9 +62,12 @@ public:
 	int getLiveLength();
 	void setLiveLength(int l);
 	vector<Lifespan> getAncestorLifespans();
+	void addAncestorLifespan(Lifespan s);
+	Lifespan getLifespan();
 
 	void consequences(Organism* other);
 	bool isDead();
+	void die(int turn);
 
 	string toString();
 

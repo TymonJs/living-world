@@ -152,7 +152,15 @@ void World::makeTurn()
 			Organism* other = getOrganismPointerFromPosition(newPosition);
 			if (other){
 				org->consequences(other);
-				if (other->isDead()) org -> move(newPosition);
+				if (other->isDead()){
+					other -> die(turn);
+					org -> addAncestorLifespan(other->getLifespan());
+					org -> move(newPosition);
+				}
+				else if (org -> isDead()){
+					org -> die(turn);
+					other -> addAncestorLifespan(org->getLifespan());
+				}
 			}
 			else org-> move(newPosition);
 

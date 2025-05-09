@@ -1,0 +1,21 @@
+#include "Wolf.h"
+#include <set>
+
+Wolf::Wolf() : Animal()
+{
+    setSpecies("W");
+}
+Wolf::Wolf(Position pos, int birth)
+    : Animal(8,pos,birth,5,16,20)
+{
+    setSpecies("W");
+}
+bool Wolf::interactsWith(string species)
+{
+    std::set<std::string> interactables = {"S"};
+    return interactables.count(species) ? true : false;
+}
+
+Organism* Wolf::breed(Position p, int birth){
+    return new Wolf{p,birth};
+}
