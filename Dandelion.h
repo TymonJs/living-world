@@ -5,5 +5,6 @@ class Dandelion : public Plant{
     public:
         Dandelion();
         Dandelion(Position position, int birth);
-        Organism* breed(Position pos, int birth) override;
+        Dandelion(Position position, int birth, vector<Lifespan> ancestorLifespans);
+        Organism* breed(Position pos, int birth, vector<Lifespan> l) override;
 };

@@ -10,5 +10,6 @@ class Grass : public Plant
     public:
         Grass();
         Grass(Position position, int birth);
-        Organism* breed(Position pos, int birth) override;
+        Grass(Position position, int birth, vector<Lifespan> ancestorLifespans);
+        Organism* breed(Position pos, int birth, vector<Lifespan> l) override;
 };

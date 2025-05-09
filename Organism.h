@@ -21,6 +21,7 @@ protected:
 public:
 	Organism();
 	Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength);
+	Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, vector<Lifespan> ancestorLifespans);
 	Organism(const Organism &o) 
         : power(o.power), 
           position(o.position), 
@@ -73,7 +74,7 @@ public:
 
 	virtual void move(Position position) = 0;
 	virtual bool interactsWith(string species) = 0;
-	virtual Organism* breed(Position pos, int birth) = 0;
+	virtual Organism* breed(Position pos, int birth, vector<Lifespan> l) = 0;
 
 	bool canReproduce();
 

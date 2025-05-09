@@ -5,6 +5,7 @@ class Wolf : public Animal{
     public:
         Wolf();
         Wolf(Position pos, int birth);
+        Wolf(Position position, int birth, vector<Lifespan> ancestorLifespans);
         bool interactsWith(string species) override;
-        Organism* breed(Position p, int birth) override;
+        Organism* breed(Position p, int birth, vector<Lifespan> l) override;
 };

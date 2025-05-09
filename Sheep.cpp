@@ -12,12 +12,18 @@ Sheep::Sheep(Position pos, int birth)
     species = "S";
 }
 
+Sheep::Sheep(Position pos, int birth, std::vector<Lifespan> ancestorLifespans)
+    : Animal(3,pos,birth,3,6,10,ancestorLifespans)
+{
+    species = "S";
+}
+
 bool Sheep::interactsWith(string species)
 {
     std::set<std::string> interactables = {"G","D"};
     return interactables.count(species) ? true : false;
 }
 
-Organism* Sheep::breed(Position p, int birth){
-    return new Sheep{p,birth};
+Organism* Sheep::breed(Position p, int birth, std::vector<Lifespan> l){
+    return new Sheep{p,birth, l};
 }

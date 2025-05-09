@@ -136,12 +136,12 @@ void World::makeTurn()
 		numberOfFreePositions = freePositions.size();
 		numberOfInteractablePositions = interactablePositions.size();
 		
-		std::cout << org->getSpecies() <<" interactable positions: " << numberOfInteractablePositions << std::endl;
+		// std::cout << org->getSpecies() <<" interactable positions: " << numberOfInteractablePositions << std::endl;
 		
 		if (numberOfFreePositions > 0 && org->canReproduce()){
 			randomIndex = rand() % numberOfFreePositions;
 			Position childPosition = freePositions[randomIndex];
-			Organism* child = org->breed(childPosition,turn);
+			Organism* child = org->breed(childPosition,turn,org->getAncestorLifespans());
 
 			addOrganism(child);
 			org->setPower(org->getPower()/2);

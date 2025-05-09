@@ -22,6 +22,16 @@ Organism::Organism(int power, Position position, int birth, int initiative, int 
 	powerToReproduce(powerToReproduce),
 	liveLength(liveLength) {}
 
+Organism::Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, std::vector<Lifespan> ancestorLifespans)
+	: power(power), 
+	position(position), 
+	species("O"), 
+	lifespan(birth), 
+	ancestorLifespans(ancestorLifespans),
+	initiative(initiative),
+	powerToReproduce(powerToReproduce),
+	liveLength(liveLength) {}
+
 Organism::~Organism() {}
 
 int Organism::getPower()
