@@ -21,7 +21,7 @@ Animal::Animal(int power, Position position, int birth, int initiative, int powe
 
 void Animal::move(Position position){
 
-	cout << "Sheep moving from (" << this->getPosition().getX()+1<< ", " << this->getPosition().getY() + 1 << ") to (" << position.getX() + 1 << ", " << position.getY() + 1 << ")" << endl;
+	// cout << "Sheep moving from (" << this->getPosition().getX()+1<< ", " << this->getPosition().getY() + 1 << ") to (" << position.getX() + 1 << ", " << position.getY() + 1 << ")" << endl;
 	lastPosition = this->position;
 	this->position = position;
 }

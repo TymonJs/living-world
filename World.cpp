@@ -119,6 +119,7 @@ void World::addOrganism(Organism* organism)
 }
 void World::makeTurn()
 {
+	// TODO: ancestorLifespans ma być wektorem wskaźników, bo gdy ojciec umiera, to nie dostają jego daty śmierci
 	vector<Position> freePositions;
 	vector<Position> interactablePositions;
 	int numberOfFreePositions;

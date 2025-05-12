@@ -17,7 +17,7 @@ Wolf::Wolf(Position pos, int birth, std::vector<Lifespan> ancestorLifespans)
 }
 bool Wolf::interactsWith(string species)
 {
-    std::set<std::string> interactables = {"S"};
+    std::set<std::string> interactables = {"S","T"};
     return interactables.count(species) ? true : false;
 }
 

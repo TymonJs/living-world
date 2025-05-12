@@ -8,6 +8,7 @@
 #include "Sheep.h"
 #include "Dandelion.h"
 #include "Wolf.h"
+#include "Toadstool.h"
 
 using namespace std;
 
@@ -30,11 +31,15 @@ int main()
 	Position posW{5,0};
 	Wolf wolf{posW};
 
-	world.addOrganism(&sheep1);
+	Position posT{4,0};
+	Toadstool t1{posT};
+
+	// world.addOrganism(&sheep1);
 	// world.addOrganism(&sheep2);
-	world.addOrganism(&grass);
-	world.addOrganism(&dandelion);
+	// world.addOrganism(&grass);
+	// world.addOrganism(&dandelion);
 	world.addOrganism(&wolf);
+	world.addOrganism(&t1);
 
 	// Sheep sheep{Position{0,0},0};
 	// Grass grass1{Position{0,1},0};
