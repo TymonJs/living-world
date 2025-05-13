@@ -110,3 +110,43 @@ bool Organism::canReproduce(){
 void Organism::die(int turn){
 	this->lifespan->setDeath(turn);
 }
+
+void Organism::save(std::ostream& out) const {
+    position.save(out);
+    out.write(reinterpret_cast<const char*>(&power), sizeof(power));
+    out.write(reinterpret_cast<const char*>(&initiative), sizeof(initiative));
+    out.write(reinterpret_cast<const char*>(&powerToReproduce), sizeof(powerToReproduce));
+    out.write(reinterpret_cast<const char*>(&liveLength), sizeof(liveLength));
+    out.write(reinterpret_cast<const char*>(&species[0]), species.size() + 1);
+
+    lifespan->save(out);
+    
+    size_t ancestorCount = ancestorLifespans.size();
+    out.write(reinterpret_cast<const char*>(&ancestorCount), sizeof(ancestorCount));
+    for (const auto& ancestor : ancestorLifespans) {
+        ancestor->save(out);
+    }
+}
+
+void Organism::load(std::istream& in) {
+    position.load(in);
+    in.read(reinterpret_cast<char*>(&power), sizeof(power));
+    in.read(reinterpret_cast<char*>(&initiative), sizeof(initiative));
+    in.read(reinterpret_cast<char*>(&powerToReproduce), sizeof(powerToReproduce));
+    in.read(reinterpret_cast<char*>(&liveLength), sizeof(liveLength));
+
+    char speciesBuffer[100];
+    in.getline(speciesBuffer, sizeof(speciesBuffer));
+    species = speciesBuffer;
+
+    lifespan->load(in);
+    
+    size_t ancestorCount;
+    in.read(reinterpret_cast<char*>(&ancestorCount), sizeof(ancestorCount));
+    ancestorLifespans.clear();
+    for (size_t i = 0; i < ancestorCount; ++i) {
+        Lifespan* ancestor = new Lifespan(0);
+        ancestor->load(in);
+        ancestorLifespans.push_back(ancestor);
+    }
+}

@@ -10,6 +10,8 @@
 #include "Wolf.h"
 #include "Toadstool.h"
 #include <vector>
+#include <iostream>
+#include <fstream> 
 
 using namespace std;
 

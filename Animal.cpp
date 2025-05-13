@@ -26,3 +26,14 @@ void Animal::move(Position position){
 	this->position = position;
 }
 
+void Animal::save(ostream& out) const
+{
+    Organism::save(out);
+    lastPosition.save(out);
+}
+
+void Animal::load(istream& in)
+{
+    Organism::load(in);
+    lastPosition.load(in);
+}

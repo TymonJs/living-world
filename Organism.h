@@ -3,6 +3,7 @@
 #include "Position.h"
 #include <vector>
 #include "Lifespan.h"
+#include <iostream>
 
 using namespace std;
 
@@ -82,5 +83,8 @@ public:
 	virtual Organism* breed(Position pos, int birth, vector<Lifespan*> l) = 0;
 
 	bool canReproduce();
+
+	virtual void save(ostream& out) const;
+    virtual void load(istream& in);        
 
 };

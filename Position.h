@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream> 
 
 using namespace std;
 
@@ -21,4 +22,7 @@ public:
 
 	double distance(Position position);
 	void move(int dx, int dy);
+
+	void save(ostream& out) const;
+	void load(istream& in);
 };
