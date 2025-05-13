@@ -6,7 +6,7 @@ Organism::Organism()
 	: power(0),
 	position(0, 0), 
 	species("O"), 
-	lifespan(0),
+	lifespan(new Lifespan(0)),
 	ancestorLifespans({}),
 	initiative(0),
 	powerToReproduce(0),
@@ -16,17 +16,17 @@ Organism::Organism(int power, Position position, int birth, int initiative, int 
     : power(power), 
 	position(position), 
 	species("O"), 
-	lifespan(birth), 
+	lifespan(new Lifespan(birth)), 
 	ancestorLifespans({}),
 	initiative(initiative),
 	powerToReproduce(powerToReproduce),
 	liveLength(liveLength) {}
 
-Organism::Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, std::vector<Lifespan> ancestorLifespans)
+Organism::Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, std::vector<Lifespan*> ancestorLifespans)
 	: power(power), 
 	position(position), 
 	species("O"), 
-	lifespan(birth), 
+	lifespan(new Lifespan(birth)), 
 	ancestorLifespans(ancestorLifespans),
 	initiative(initiative),
 	powerToReproduce(powerToReproduce),
@@ -54,7 +54,7 @@ void Organism::setPosition(Position position)
 	this->position = position;
 }
 
-std::vector<Lifespan> Organism::getAncestorLifespans()
+std::vector<Lifespan*> Organism::getAncestorLifespans()
 {
 	return this->ancestorLifespans;
 }
@@ -86,10 +86,10 @@ int Organism::getLiveLength()
 void Organism::setLiveLength(int l){
 	this->liveLength=l;
 }
-Lifespan Organism::getLifespan(){
+Lifespan* Organism::getLifespan(){
 	return this->lifespan;
 }
-void Organism::addAncestorLifespan(Lifespan l){
+void Organism::addAncestorLifespan(Lifespan* l){
 	this->ancestorLifespans.push_back(l);
 }
 void Organism::consequences(Organism* other){
@@ -108,5 +108,5 @@ bool Organism::canReproduce(){
 	return power>=powerToReproduce;
 }
 void Organism::die(int turn){
-	this->lifespan.setDeath(turn);
+	this->lifespan->setDeath(turn);
 }

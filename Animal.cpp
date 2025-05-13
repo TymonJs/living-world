@@ -13,7 +13,7 @@ Animal::Animal(int power, Position position, int birth,int initiative, int power
 	lastPosition = position;
 	setSpecies("A");
 }
-Animal::Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength,std::vector<Lifespan> ancestorLifespans)
+Animal::Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength,std::vector<Lifespan*> ancestorLifespans)
 	: Organism(power, position, birth, initiative, powerToReproduce, liveLength,ancestorLifespans)
 {
 	setSpecies("A");

@@ -137,12 +137,12 @@ void World::makeTurn()
 		numberOfFreePositions = freePositions.size();
 		numberOfInteractablePositions = interactablePositions.size();
 		
-		// std::cout << org->getSpecies() <<" interactable positions: " << numberOfInteractablePositions << std::endl;
-		
 		if (numberOfFreePositions > 0 && org->canReproduce()){
 			randomIndex = rand() % numberOfFreePositions;
 			Position childPosition = freePositions[randomIndex];
-			Organism* child = org->breed(childPosition,turn,org->getAncestorLifespans());
+			vector<Lifespan*> childAncestors = org->getAncestorLifespans();
+			childAncestors.push_back(org->getLifespan());
+			Organism* child = org->breed(childPosition,turn,childAncestors);
 
 			addOrganism(child);
 			org->setPower(org->getPower()/2);
@@ -199,4 +199,6 @@ string World::toString()
 	}
 	return result;
 }
-
+vector<Organism*> World::getOrganisms(){
+	return organisms;
+}

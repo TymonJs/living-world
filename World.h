@@ -32,14 +32,12 @@ public:
 
 	int getTurn();
 	
+	vector<Organism*> getOrganisms();
 	void addOrganism(Organism* organism);
 	void removeOrganism(Organism* organism);
 	vector<Position> getVectorOfFreePositionsAround(Position position);
 	vector<Position> getVectorOfInteractablePositionsAroundOrganism(Organism* org);
 	void makeTurn();
-
-	// void writeWorld(string fileName);
-	// void readWorld(string fileName);
 	
 	string toString();
 

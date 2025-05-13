@@ -9,6 +9,7 @@
 #include "Dandelion.h"
 #include "Wolf.h"
 #include "Toadstool.h"
+#include <vector>
 
 using namespace std;
 

@@ -12,8 +12,8 @@ protected:
 	int power;
 	Position position;
 	string species;
-	Lifespan lifespan;
-	vector<Lifespan> ancestorLifespans;
+	Lifespan* lifespan;
+	vector<Lifespan*> ancestorLifespans;
 	int initiative;
 	int powerToReproduce;
 	int liveLength;
@@ -21,7 +21,7 @@ protected:
 public:
 	Organism();
 	Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength);
-	Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, vector<Lifespan> ancestorLifespans);
+	Organism(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, vector<Lifespan*> ancestorLifespans);
 	Organism(const Organism &o) 
         : power(o.power), 
           position(o.position), 
@@ -55,16 +55,21 @@ public:
 
 	int getPower();
 	void setPower(int power);
+
 	Position getPosition();
 	void setPosition(Position position);
+
 	string getSpecies();
 	void setSpecies(string spec);
+
 	int getInitiative();
+
 	int getLiveLength();
 	void setLiveLength(int l);
-	vector<Lifespan> getAncestorLifespans();
-	void addAncestorLifespan(Lifespan s);
-	Lifespan getLifespan();
+	
+	vector<Lifespan*> getAncestorLifespans();
+	void addAncestorLifespan(Lifespan* s);
+	Lifespan* getLifespan();
 
 	void consequences(Organism* other);
 	bool isDead();
@@ -74,7 +79,7 @@ public:
 
 	virtual void move(Position position) = 0;
 	virtual bool interactsWith(string species) = 0;
-	virtual Organism* breed(Position pos, int birth, vector<Lifespan> l) = 0;
+	virtual Organism* breed(Position pos, int birth, vector<Lifespan*> l) = 0;
 
 	bool canReproduce();
 

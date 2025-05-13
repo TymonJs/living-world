@@ -11,7 +11,7 @@ Plant::Plant(int power, Position position, int birth, int initiative, int powerT
 {
 	setSpecies("P");
 }
-Plant::Plant(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength,std::vector<Lifespan> ancestorLifespans)
+Plant::Plant(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength,std::vector<Lifespan*> ancestorLifespans)
 	: Organism(power, position, birth, initiative, powerToReproduce, liveLength,ancestorLifespans)
 {
 	setSpecies("P");

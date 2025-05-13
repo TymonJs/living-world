@@ -9,11 +9,11 @@ Dandelion::Dandelion(Position pos)
 {
     setSpecies("D");
 }
-Dandelion::Dandelion(Position pos, int birth,std::vector<Lifespan> ancestorLifespans)
+Dandelion::Dandelion(Position pos, int birth,std::vector<Lifespan*> ancestorLifespans)
     : Plant(0,pos,birth,0,2,6,ancestorLifespans)
 {
     setSpecies("D");
 }
-Organism* Dandelion::breed(Position pos, int birth,std::vector<Lifespan> ancestorLifespans){
+Organism* Dandelion::breed(Position pos, int birth,std::vector<Lifespan*> ancestorLifespans){
     return new Dandelion{pos,birth, ancestorLifespans};
 }

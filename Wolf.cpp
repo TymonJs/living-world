@@ -10,7 +10,7 @@ Wolf::Wolf(Position pos)
 {
     setSpecies("W");
 }
-Wolf::Wolf(Position pos, int birth, std::vector<Lifespan> ancestorLifespans)
+Wolf::Wolf(Position pos, int birth, std::vector<Lifespan*> ancestorLifespans)
     : Animal(8,pos,birth,5,16,20,ancestorLifespans)
 {
     setSpecies("W");
@@ -21,6 +21,6 @@ bool Wolf::interactsWith(string species)
     return interactables.count(species) ? true : false;
 }
 
-Organism* Wolf::breed(Position p, int birth, std::vector<Lifespan> l){
+Organism* Wolf::breed(Position p, int birth, std::vector<Lifespan*> l){
     return new Wolf{p,birth, l};
 }
