@@ -2,6 +2,12 @@
 #include <fstream>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include "Grass.h"      
+#include "Sheep.h"      
+#include "Dandelion.h"  
+#include "Wolf.h"       
+#include "Toadstool.h"  
 
 string World::getOrganismFromPosition(int x, int y)
 {
@@ -202,3 +208,53 @@ string World::toString()
 vector<Organism*> World::getOrganisms(){
 	return organisms;
 }
+
+void World::save(std::ostream& out) const {
+    out.write(reinterpret_cast<const char*>(&worldX), sizeof(worldX));
+    out.write(reinterpret_cast<const char*>(&worldY), sizeof(worldY));
+    out.write(reinterpret_cast<const char*>(&turn), sizeof(turn));
+    
+    size_t organismCount = organisms.size();
+    out.write(reinterpret_cast<const char*>(&organismCount), sizeof(organismCount));
+    
+    for (const Organism* org : organisms) {
+        org->save(out);
+    }
+}
+
+void World::load(std::istream& in) {
+    in.read(reinterpret_cast<char*>(&worldX), sizeof(worldX));
+    in.read(reinterpret_cast<char*>(&worldY), sizeof(worldY));
+    in.read(reinterpret_cast<char*>(&turn), sizeof(turn));
+    
+    size_t organismCount;
+    in.read(reinterpret_cast<char*>(&organismCount), sizeof(organismCount));
+    
+    organisms.clear();
+    
+    for (size_t i = 0; i < organismCount; ++i) {
+        char species;
+        in.read(&species, sizeof(species));
+        
+        Organism* org = nullptr;
+        
+        if (species == 'G') {
+            org = new Grass();
+        } else if (species == 'S') {
+            org = new Sheep();
+        } else if (species == 'D') {
+            org = new Dandelion();
+        } else if (species == 'W') {
+            org = new Wolf();
+        } else if (species == 'T') {
+            org = new Toadstool();
+        }
+        
+        if (org) {
+            org->load(in);
+            addOrganism(org);
+        }
+    }
+}
+
+

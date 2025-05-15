@@ -60,26 +60,5 @@ int main()
 		cout << world.toString() << endl;
 	}
 
-	// // Tura 0
-	// cout << world.toString() << endl;
-
-	// // Tura 1
-	// world.makeTurn();
-	// cout << world.toString() << endl;
-
-	// // Tura 2
-	// world.makeTurn();
-	// cout << world.toString() << endl;
-
-	// // world.writeWorld("world.bin");
-
-	// // Tura 3
-	// world.makeTurn();
-	// cout << world.toString() << endl;
-
-	// // powrot do Tury 2
-	// world.readWorld("world.bin");
-	// cout << world.toString() << endl;
-
 	return 0;
 }

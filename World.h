@@ -3,6 +3,8 @@
 #include <vector>
 #include <ctime>
 #include "Organism.h"
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -40,6 +42,9 @@ public:
 	void makeTurn();
 	
 	string toString();
+
+	void save(std::ostream& out) const;
+    void load(std::istream& in); 
 
 };
 
