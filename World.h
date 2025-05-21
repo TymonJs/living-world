@@ -34,7 +34,7 @@ public:
 
 	int getTurn();
 	
-	vector<Organism*> getOrganisms();
+	vector<Organism*> getOrganisms() const;
 	void addOrganism(Organism* organism);
 	void removeOrganism(Organism* organism);
 	vector<Position> getVectorOfFreePositionsAround(Position position);

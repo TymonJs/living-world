@@ -1,9 +1,10 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -O2
+CXXFLAGS = -std=c++11 -Wall -Wextra -O2 `sdl2-config --cflags`
+LDFLAGS = `sdl2-config --libs`
 
 # Executable name
-TARGET = LivingWorld
+TARGET = main
 
 # Source files
 SRCS := $(wildcard *.cpp)
@@ -16,7 +17,7 @@ all: $(TARGET)
 
 # Link object files into the final executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 # Compile source files into object files
 %.o: %.cpp

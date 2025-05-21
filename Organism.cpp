@@ -93,7 +93,11 @@ void Organism::addAncestorLifespan(Lifespan* l){
 	this->ancestorLifespans.push_back(l);
 }
 void Organism::consequences(Organism* other){
-	if (other->getSpecies() == "T" || power < other->getPower()){
+	if (other->getSpecies() == "T"){
+		this->setLiveLength(0);
+		other->setLiveLength(0);
+	}
+	else if (power < other->getPower()){
 		this->setLiveLength(0);
 	}
 	else{

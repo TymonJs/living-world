@@ -205,7 +205,7 @@ string World::toString()
 	}
 	return result;
 }
-vector<Organism*> World::getOrganisms(){
+vector<Organism*> World::getOrganisms() const {
 	return organisms;
 }
 
