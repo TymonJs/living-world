@@ -60,7 +60,7 @@ public:
 	Position getPosition();
 	void setPosition(Position position);
 
-	string getSpecies();
+	string getSpecies() const;
 	void setSpecies(string spec);
 
 	int getInitiative();

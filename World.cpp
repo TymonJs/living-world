@@ -86,7 +86,7 @@ World::World(int worldX, int worldY)
 	setWorldY(worldY);
 }
 
-int World::getWorldX()
+int World::getWorldX() const
 {
 	return this->worldX;
 }
@@ -96,7 +96,7 @@ void World::setWorldX(int worldX)
 	this->worldX = worldX;
 }
 
-int World::getWorldY()
+int World::getWorldY() const
 {
 	return this->worldY;
 }
@@ -106,7 +106,7 @@ void World::setWorldY(int worldY)
 	this->worldY = worldY;
 }
 
-int World::getTurn()
+int World::getTurn() const
 {
 	return this->turn;
 }
@@ -125,7 +125,6 @@ void World::addOrganism(Organism* organism)
 }
 void World::makeTurn()
 {
-	// TODO: ancestorLifespans ma być wektorem wskaźników, bo gdy ojciec umiera, to nie dostają jego daty śmierci
 	vector<Position> freePositions;
 	vector<Position> interactablePositions;
 	int numberOfFreePositions;
@@ -208,53 +207,6 @@ string World::toString()
 vector<Organism*> World::getOrganisms() const {
 	return organisms;
 }
-
-void World::save(std::ostream& out) const {
-    out.write(reinterpret_cast<const char*>(&worldX), sizeof(worldX));
-    out.write(reinterpret_cast<const char*>(&worldY), sizeof(worldY));
-    out.write(reinterpret_cast<const char*>(&turn), sizeof(turn));
-    
-    size_t organismCount = organisms.size();
-    out.write(reinterpret_cast<const char*>(&organismCount), sizeof(organismCount));
-    
-    for (const Organism* org : organisms) {
-        org->save(out);
-    }
+void World::setTurn(int turn) {
+    this->turn = turn;
 }
-
-void World::load(std::istream& in) {
-    in.read(reinterpret_cast<char*>(&worldX), sizeof(worldX));
-    in.read(reinterpret_cast<char*>(&worldY), sizeof(worldY));
-    in.read(reinterpret_cast<char*>(&turn), sizeof(turn));
-    
-    size_t organismCount;
-    in.read(reinterpret_cast<char*>(&organismCount), sizeof(organismCount));
-    
-    organisms.clear();
-    
-    for (size_t i = 0; i < organismCount; ++i) {
-        char species;
-        in.read(&species, sizeof(species));
-        
-        Organism* org = nullptr;
-        
-        if (species == 'G') {
-            org = new Grass();
-        } else if (species == 'S') {
-            org = new Sheep();
-        } else if (species == 'D') {
-            org = new Dandelion();
-        } else if (species == 'W') {
-            org = new Wolf();
-        } else if (species == 'T') {
-            org = new Toadstool();
-        }
-        
-        if (org) {
-            org->load(in);
-            addOrganism(org);
-        }
-    }
-}
-
-

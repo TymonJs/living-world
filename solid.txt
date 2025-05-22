@@ -1,0 +1,1 @@
+1. Migracja serializacji świata i pozycji do osobnych klas (teraz klasy mają jedno zadanie)

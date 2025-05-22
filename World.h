@@ -27,12 +27,12 @@ public:
 	World(int worldX, int worldY);
 	World() : World(6, 6) {};
 
-	int getWorldX();
+	int getWorldX() const;
 	void setWorldX(int worldX);
-	int getWorldY();
+	int getWorldY() const;
 	void setWorldY(int worldY);
 
-	int getTurn();
+	int getTurn() const;
 	
 	vector<Organism*> getOrganisms() const;
 	void addOrganism(Organism* organism);
@@ -40,11 +40,9 @@ public:
 	vector<Position> getVectorOfFreePositionsAround(Position position);
 	vector<Position> getVectorOfInteractablePositionsAroundOrganism(Organism* org);
 	void makeTurn();
-	
-	string toString();
+	void setTurn(int turn);
 
-	void save(std::ostream& out) const;
-    void load(std::istream& in); 
+	string toString();
 
 };
 

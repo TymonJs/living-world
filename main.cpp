@@ -42,18 +42,18 @@ int main(int, char**) {
                                           SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    World world(16, 12); // worldX = 16, worldY = 12
+    World world(16, 12);
     
-    Position posW2{ 3, 3 };
-	Position posW3{ 2, 3 };
-	Position postemp{0,0};
-	Position posD{5,5};
-	Position posW{5,0};
-	Position posT{4,0};
+    Position posS1{ 15, 1 };
+	Position posS2{ 15, 0 };
+	Position posG{0,0};
+	Position posD{15,11};
+	Position posW{0, 11};
+	Position posT{8,6};
 
-	world.addOrganism(new Sheep(posW2));
-    world.addOrganism(new Sheep(posW3));
-    world.addOrganism(new Grass(postemp));
+	world.addOrganism(new Sheep(posS1));
+    world.addOrganism(new Sheep(posS2));
+    world.addOrganism(new Grass(posG));
     world.addOrganism(new Dandelion(posD));
     world.addOrganism(new Wolf(posW));
     world.addOrganism(new Toadstool(posT));
@@ -67,7 +67,7 @@ int main(int, char**) {
                 running = false;
             if (event.type == SDL_KEYDOWN) {
                 if (event.key.keysym.sym == SDLK_SPACE)
-                    world.makeTurn(); // advance the simulation on SPACE
+                    world.makeTurn();
             }
         }
 

@@ -1,6 +1,7 @@
 #include "Organism.h"
 #include <vector>
 #include "Lifespan.h"
+#include "PositionSerialization.h"
 
 Organism::Organism()
 	: power(0),
@@ -66,7 +67,7 @@ string Organism::toString()
 		", position: " + getPosition().toString() + "}";
 }
 
-string Organism::getSpecies()
+string Organism::getSpecies() const
 {
 	return this->species;
 }
@@ -116,7 +117,7 @@ void Organism::die(int turn){
 }
 
 void Organism::save(std::ostream& out) const {
-    position.save(out);
+	PositionSerialization::save(position,out);
     out.write(reinterpret_cast<const char*>(&power), sizeof(power));
     out.write(reinterpret_cast<const char*>(&initiative), sizeof(initiative));
     out.write(reinterpret_cast<const char*>(&powerToReproduce), sizeof(powerToReproduce));
@@ -133,7 +134,7 @@ void Organism::save(std::ostream& out) const {
 }
 
 void Organism::load(std::istream& in) {
-    position.load(in);
+    PositionSerialization::load(position,in);
     in.read(reinterpret_cast<char*>(&power), sizeof(power));
     in.read(reinterpret_cast<char*>(&initiative), sizeof(initiative));
     in.read(reinterpret_cast<char*>(&powerToReproduce), sizeof(powerToReproduce));

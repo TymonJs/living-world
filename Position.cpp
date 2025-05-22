@@ -7,7 +7,7 @@ Position::Position(int x, int y)
 	setY(y);
 }
 
-int Position::getX()
+int Position::getX() const
 {
 	return this->x;
 }
@@ -20,7 +20,7 @@ void Position::setX(int x)
 		this->x = 0;
 }
 
-int Position::getY()
+int Position::getY() const
 {
 	return this->y;
 }
@@ -49,14 +49,4 @@ void Position::move(int dx, int dy)
 {
 	setX(getX() + dx);
 	setY(getY() + dy);
-}
-
-void Position::save(std::ostream& out) const {
-	out.write(reinterpret_cast<const char*>(&x), sizeof(x));
-	out.write(reinterpret_cast<const char*>(&y), sizeof(y));
-}
-
-void Position::load(std::istream& in) {
-	in.read(reinterpret_cast<char*>(&x), sizeof(x));
-	in.read(reinterpret_cast<char*>(&y), sizeof(y));
 }

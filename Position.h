@@ -13,16 +13,13 @@ public:
 	Position(int x, int y);
 	Position() : x(0), y(0) {}
 
-	int getX();
+	int getX() const;
 	void setX(int x);
-	int getY();
+	int getY() const;
 	void setY(int y);
 
 	string toString();
 
 	double distance(Position position);
 	void move(int dx, int dy);
-
-	void save(ostream& out) const;
-	void load(istream& in);
 };

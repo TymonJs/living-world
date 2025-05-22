@@ -1,5 +1,7 @@
 #include "Animal.h"
+#include "PositionSerialization.h"
 #include <iostream>
+
 using namespace std;
 
 Animal::Animal() : Organism()
@@ -29,11 +31,11 @@ void Animal::move(Position position){
 void Animal::save(ostream& out) const
 {
     Organism::save(out);
-    lastPosition.save(out);
+	PositionSerialization::save(lastPosition,out);
 }
 
 void Animal::load(istream& in)
 {
     Organism::load(in);
-    lastPosition.load(in);
+    PositionSerialization::load(lastPosition,in);
 }
