@@ -18,7 +18,7 @@ void WorldSerialization::save(const World& world, std::ostream& out){
     size_t organismCount = organisms.size();
     out.write(reinterpret_cast<const char*>(&organismCount), sizeof(organismCount));
 
-    for (const Organism* org : organisms) {
+    for (const shared_ptr<Organism>& org : organisms) {
         out.put(org->getSpecies()[0]); 
         org->save(out);
     }
@@ -43,17 +43,17 @@ void WorldSerialization::load(World& world, std::istream& in) {
         char speciesChar;
         in.get(speciesChar);
 
-        Organism* org = nullptr;
+        shared_ptr<Organism> org;
         if (speciesChar == 'G') {
-            org = new Grass();
+            org = make_shared<Grass>();
         } else if (speciesChar == 'S') {
-            org = new Sheep();
+            org = make_shared<Sheep>();
         } else if (speciesChar == 'D') {
-            org = new Dandelion();
+            org = make_shared<Dandelion>();
         } else if (speciesChar == 'W') {
-            org = new Wolf();
+            org = make_shared<Wolf>();
         } else if (speciesChar == 'T') {
-            org = new Toadstool();
+            org = make_shared<Toadstool>();
         }
 
         if (org) {

@@ -11,7 +11,7 @@
 
 string World::getOrganismFromPosition(int x, int y)
 {
-	for (Organism* org : organisms)
+	for (const shared_ptr<Organism>& org : organisms)
 		if (org->getPosition().getX() == x && org->getPosition().getY() == y)
 			return org->getSpecies();
 	return "";
@@ -20,12 +20,12 @@ string World::getOrganismFromPosition(int x, int y)
 Organism* World::getOrganismPointerFromPosition(Position p)
 {
     auto it = std::find_if(organisms.begin(), organisms.end(),
-        [&](Organism* org){
+        [&](const shared_ptr<Organism>& org){
             Position currPos = org->getPosition();
             return currPos.getX() == p.getX() && currPos.getY() == p.getY();
         });
 
-    if (it != organisms.end()) return *it;
+    if (it != organisms.end()) return it->get();
 
     return nullptr;
 }
@@ -72,9 +72,10 @@ vector<Position> World::getVectorOfInteractablePositionsAroundOrganism(Organism*
 			int new_x = pos_x + x, new_y = pos_y + y;
 			if (!isPositionOnWorld(new_x,new_y)) continue;
 
-			if (isPositionFree(new_x, new_y) || org->interactsWith(getOrganismFromPosition(new_x,new_y))){
-				result.push_back(Position(new_x, new_y));
-			}
+            Organism* otherOrganism = getOrganismPointerFromPosition(Position(new_x, new_y));
+            if (isPositionFree(new_x, new_y) || (otherOrganism != nullptr && org->interactsWith(otherOrganism))){
+                result.push_back(Position(new_x, new_y));
+            }
 		}
 
 	return result;
@@ -111,14 +112,14 @@ int World::getTurn() const
 	return this->turn;
 }
 
-void World::addOrganism(Organism* organism)
+void World::addOrganism(shared_ptr<Organism> organism)
 {
 	Position pos = organism->getPosition();
 	if (isPositionOnWorld(pos.getX(), pos.getY())) {
 		this->organisms.push_back(organism);
 
 		std::sort(organisms.begin(), organisms.end(),
-			[](Organism* a, Organism* b) {
+			[](const shared_ptr<Organism>& a, const shared_ptr<Organism>& b) {
 				return a->getInitiative() > b->getInitiative();
 			});
 	}
@@ -131,23 +132,23 @@ void World::makeTurn()
 	int numberOfInteractablePositions;
 	int randomIndex;
 
-	vector<Organism*> curr = organisms;
+	vector<shared_ptr<Organism>> curr = organisms;
 
 	srand(time(0));
-	for (Organism* org : curr) {
+	for (const shared_ptr<Organism>& org : curr) {
 		if (org->isDead()) continue;
 
 		freePositions = getVectorOfFreePositionsAround(org->getPosition());
-		interactablePositions = getVectorOfInteractablePositionsAroundOrganism(org);
+		interactablePositions = getVectorOfInteractablePositionsAroundOrganism(org.get());
 		numberOfFreePositions = freePositions.size();
 		numberOfInteractablePositions = interactablePositions.size();
 		
 		if (numberOfFreePositions > 0 && org->canReproduce()){
 			randomIndex = rand() % numberOfFreePositions;
 			Position childPosition = freePositions[randomIndex];
-			vector<Lifespan*> childAncestors = org->getAncestorLifespans();
+			vector<shared_ptr<Lifespan>> childAncestors = org->getAncestorLifespans();
 			childAncestors.push_back(org->getLifespan());
-			Organism* child = org->breed(childPosition,turn,childAncestors);
+			shared_ptr<Organism> child = org->breed(childPosition,turn,childAncestors);
 
 			addOrganism(child);
 			org->setPower(org->getPower()/2);
@@ -178,7 +179,7 @@ void World::makeTurn()
 
 	organisms.erase(
 		remove_if(organisms.begin(), organisms.end(),
-			[](Organism* org) {
+			[](const shared_ptr<Organism>& org) {
 				return org->isDead();
 			}),
 		organisms.end()
@@ -204,7 +205,7 @@ string World::toString()
 	}
 	return result;
 }
-vector<Organism*> World::getOrganisms() const {
+vector<shared_ptr<Organism>> World::getOrganisms() const {
 	return organisms;
 }
 void World::setTurn(int turn) {

@@ -5,6 +5,7 @@
 #include "Organism.h"
 #include <iostream>
 #include <fstream>
+#include <memory>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ private:
 	int worldX;
 	int worldY;
 	int turn = 0;
-	vector<Organism*> organisms;
+	vector<shared_ptr<Organism>> organisms;
 	char separator = '.';
 
 	string getOrganismFromPosition(int x, int y);
@@ -34,8 +35,8 @@ public:
 
 	int getTurn() const;
 	
-	vector<Organism*> getOrganisms() const;
-	void addOrganism(Organism* organism);
+	vector<shared_ptr<Organism>> getOrganisms() const;
+	void addOrganism(shared_ptr<Organism> organism);
 	void removeOrganism(Organism* organism);
 	vector<Position> getVectorOfFreePositionsAround(Position position);
 	vector<Position> getVectorOfInteractablePositionsAroundOrganism(Organism* org);
@@ -45,4 +46,3 @@ public:
 	string toString();
 
 };
-

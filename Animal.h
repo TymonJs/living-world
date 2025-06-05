@@ -9,7 +9,7 @@ class Animal : public Organism
 	public:
 		Animal();
 		Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength);
-		Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, vector<Lifespan*> ancestorLifespans);
+		Animal(int power, Position position, int birth, int initiative, int powerToReproduce, int liveLength, vector<shared_ptr<Lifespan>> ancestorLifespans);
 		void move(Position position) override;
 		void save(ostream& out) const override;
     	void load(istream& in) override;
@@ -17,4 +17,3 @@ class Animal : public Organism
 	private:
 		Position lastPosition;
 };
-

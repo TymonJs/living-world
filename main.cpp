@@ -16,7 +16,7 @@ void renderWorld(SDL_Renderer* renderer, const World& world) {
 
     auto organisms = world.getOrganisms();
 
-    for (auto* org : organisms) {
+    for (const auto& org : organisms) {
         Position pos = org->getPosition();
         std::string species = org->getSpecies();
         SDL_Rect rect = { pos.getX() * CELL_SIZE, pos.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE };
@@ -51,12 +51,12 @@ int main(int, char**) {
 	Position posW{0, 11};
 	Position posT{8,6};
 
-	world.addOrganism(new Sheep(posS1));
-    world.addOrganism(new Sheep(posS2));
-    world.addOrganism(new Grass(posG));
-    world.addOrganism(new Dandelion(posD));
-    world.addOrganism(new Wolf(posW));
-    world.addOrganism(new Toadstool(posT));
+	world.addOrganism(make_shared<Sheep>(posS1));
+    world.addOrganism(make_shared<Sheep>(posS2));
+    world.addOrganism(make_shared<Grass>(posG));
+    world.addOrganism(make_shared<Dandelion>(posD));
+    world.addOrganism(make_shared<Wolf>(posW));
+    world.addOrganism(make_shared<Toadstool>(posT));
 
 
     bool running = true;

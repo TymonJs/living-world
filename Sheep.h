@@ -7,7 +7,6 @@ class Sheep : public Animal{
 public:
     Sheep();
     Sheep(Position position);
-    Sheep(Position position, int birth, vector<Lifespan*> ancestorLifespans);
-    bool interactsWith(string species) override;
-    Organism* breed(Position p, int birth, vector<Lifespan*> l) override;
+    Sheep(Position position, int birth, vector<shared_ptr<Lifespan>> ancestorLifespans);
+    shared_ptr<Organism> breed(Position p, int birth, vector<shared_ptr<Lifespan>> l) override;
 };
